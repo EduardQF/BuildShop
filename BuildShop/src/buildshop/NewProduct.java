@@ -74,7 +74,7 @@ public class NewProduct extends javax.swing.JFrame {
             errorCost.setText("ingrese solamente numeros");
         }
 
-        if (Utiles.validadorIntPos(cantProduct1.getText())) {
+        if (Utiles.validadorString(cantProduct1.getText())) {
             unit = cantProduct1.getText();
             uni = true;
         } else {

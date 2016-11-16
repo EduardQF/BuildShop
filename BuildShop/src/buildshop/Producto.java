@@ -12,6 +12,7 @@ public class Producto extends JButton {
     private int stock;
 
     public Producto(String id, String code, String name, String cost, String price, String stock) {
+        super();
         this.id = id;
         this.code = code;
         this.name = name;
@@ -66,6 +67,11 @@ public class Producto extends JButton {
 
     public int getStock() {
         return stock;
+    }
+    
+    public String[] getDatos(){
+        String [] cadena={this.name,String.valueOf(price)};
+        return cadena;
     }
 
 }

@@ -117,7 +117,7 @@ public class DataManager {
 		String data = "";
 		for (int i = 0; i < db_client.size(); i++) {
 			if (i != 0) {
-				data += "¦»»»¦";
+				data += "-----";
 			}
 		}
 		DataReader.writeData("C:/BuildShop/DB/clients.buildshop", data);
