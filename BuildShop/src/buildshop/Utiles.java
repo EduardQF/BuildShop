@@ -2,11 +2,8 @@ package BuildShop;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Eduard QF
- */
-public class Utiles {
+
+public  class Utiles {
 
     public static boolean validarClave(String cadena) {
         boolean v = cadena.matches("[a-zA-Z0-9]+");
@@ -14,7 +11,12 @@ public class Utiles {
     }
 
     public static boolean validadorString(String cadena) {
-        boolean v = cadena.matches("[a-zA-Z]+");
+        boolean v = cadena.matches("[a-zA-Z\\s]+");
+        return v;
+    }
+    
+    public static boolean validadorMixto(String cadena){
+        boolean v = cadena.matches("[a-zA-Z0-9]+");
         return v;
     }
 
@@ -125,6 +127,10 @@ public class Utiles {
             }
         }
         return validador;
+    }
+    
+    public  static boolean comparadorTabla(String nombre, String valueAt) {
+        return(nombre.equals(String.valueOf(valueAt)));
     }
 
 }

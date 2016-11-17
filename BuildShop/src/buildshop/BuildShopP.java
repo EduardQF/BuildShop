@@ -11,7 +11,7 @@ import javax.swing.table.*;
  * @author Eduard QF
  */
 public class BuildShopP extends javax.swing.JFrame implements ActionListener {
-    
+
     public BuildShopP() {
         DataManager.hideLS();
         initComponents();
@@ -35,9 +35,15 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         jVenta = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProducts = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jTotal = new javax.swing.JTextField();
         deletePventa = new javax.swing.JButton();
         addOne = new javax.swing.JButton();
         deleteOne = new javax.swing.JButton();
+        jbusquedaç = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jcreatedSell = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         registroMensual = new javax.swing.JMenuItem();
@@ -82,11 +88,12 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         );
         jPanelBotonProductosLayout.setVerticalGroup(
             jPanelBotonProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGap(0, 513, Short.MAX_VALUE)
         );
 
         jVenta.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTableProducts.setAutoCreateRowSorter(true);
         jTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -97,15 +104,29 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         ));
         jScrollPane1.setViewportView(jTableProducts);
 
+        jLabel2.setText("Total:");
+
+        jTotal.setToolTipText("");
+
         javax.swing.GroupLayout jVentaLayout = new javax.swing.GroupLayout(jVenta);
         jVenta.setLayout(jVentaLayout);
         jVentaLayout.setHorizontalGroup(
             jVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+            .addGroup(jVentaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTotal))
         );
         jVentaLayout.setVerticalGroup(
             jVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(jVentaLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         deletePventa.setText("Eliminar");
@@ -113,6 +134,18 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         addOne.setText("Agregar");
 
         deleteOne.setText("Quitar");
+
+        jLabel1.setText("Busqueda:");
+
+        jcreatedSell.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jcreatedSell.setText("Generar Ventas");
+        jcreatedSell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcreatedSellActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Buscar");
 
         jMenu1.setText("Venta");
 
@@ -291,16 +324,26 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jPanelBotonProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(deletePventa, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(addOne, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(deleteOne, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbusquedaç, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deletePventa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addOne, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deleteOne, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jcreatedSell, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,12 +351,21 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deletePventa)
-                            .addComponent(addOne)
-                            .addComponent(deleteOne)))
-                    .addComponent(jPanelBotonProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jbusquedaç, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(deleteOne)
+                                .addComponent(addOne)
+                                .addComponent(deletePventa)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcreatedSell))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanelBotonProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -384,6 +436,11 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         Inventario.planilla_Usuarios();
     }//GEN-LAST:event_jregistrosUsersActionPerformed
 
+    private void jcreatedSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcreatedSellActionPerformed
+        String []productsSell=readProducts();
+        VentasBSP.generateSell(productsSell);
+    }//GEN-LAST:event_jcreatedSellActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AgregarProductos;
@@ -396,6 +453,9 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenuItem detallesP;
     private javax.swing.JMenu estadisticas;
     private javax.swing.JMenuItem fullVentas;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -411,7 +471,10 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenuItem jRegistroVentas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProducts;
+    private javax.swing.JTextField jTotal;
     private javax.swing.JPanel jVenta;
+    private javax.swing.JTextField jbusquedaç;
+    private javax.swing.JButton jcreatedSell;
     private javax.swing.JMenuItem jregistrosUsers;
     private javax.swing.JMenuItem modificarWorker;
     private javax.swing.JMenuItem planillaVentas;
@@ -423,14 +486,15 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenuItem ventasMens;
     // End of variables declaration//GEN-END:variables
 
+    //crea botones de los productos
     private void mostBotonsProduct() {
         System.out.println("creating botons..");
         this.jPanelBotonProductos.removeAll();
         int cont = 0;
         String product[] = DataReader.readData("C:/BuildShop/DB/products.buildshop");
         String productList[][] = AdminBSP.productRegister(product);
-        int[]fc=filcol(productList.length);
-        
+        int[] fc = VentasBSP.filcol(productList.length);
+
         this.jPanelBotonProductos.setLayout(new java.awt.GridLayout(fc[0], fc[1]));
         for (int filas = 0; filas < fc[0]; filas++) {
             for (int columnas = 0; columnas < fc[1]; columnas++) {
@@ -450,7 +514,8 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-
+    
+    //entrega la acciones
     @Override
     public void actionPerformed(ActionEvent e) {
         DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
@@ -459,12 +524,12 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         int valorT = boton.getPrice() * cant;
         boolean state = false;
         if (jTableProducts.getRowCount() == 0) {
-            model.addRow(created(boton, cant, valorT));
+            model.addRow(VentasBSP.created(boton, cant, valorT));
             System.out.println("craeted");
         } else {
             for (int x = 0; x < jTableProducts.getRowCount(); x++) {
                 System.out.println(jTableProducts.getRowCount() + " x:" + x);
-                if (comparador(boton.getName(), String.valueOf(jTableProducts.getValueAt(x, 0)))) {
+                if (Utiles.comparadorTabla(boton.getName(), String.valueOf(jTableProducts.getValueAt(x, 0)))) {
                     state = true;
                     position = x;
                     break;
@@ -476,54 +541,30 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
                 addProduct(position, boton);
                 System.out.println("add cant");
             } else {
-                model.addRow(created(boton, cant, valorT));
+                model.addRow(VentasBSP.created(boton, cant, valorT));
                 System.out.println("add to Sell");
             }
         }
 
     }
 
-    private boolean comparador(String nombre, String valueAt) {
-        if (nombre.equals(String.valueOf(valueAt))) {
-            return true;
-        }
-        return false;
-    }
-
-    private String[] created(Producto boton, int cant, int valorT) {
-        String[] dataTable = {boton.getName(), String.valueOf(cant), String.valueOf(boton.getPrice()), String.valueOf(valorT)};
-        return dataTable;
-    }
-
+    //añade filas de productos a 
     private void addProduct(int x, Producto boton) {
         int valor = Integer.valueOf(String.valueOf(jTableProducts.getValueAt(x, 1)));
-        int v[]=valores(boton,valor);
+        int v[] = VentasBSP.valores(boton, valor);
         jTableProducts.setValueAt(v[0], x, 1);
         jTableProducts.setValueAt(v[1], x, 3);
     }
 
-    private int[] valores(Producto boton,int valor) {
-        
-        int cant = 1 + valor;
-        System.out.println(".");
-        int valorT = boton.getPrice() * cant;
-        int v[]={cant,valorT};
-        return v;
-    }
-    
-    private int[] filcol(int length){
-        int[]filcol=new int[2];
-    if (length <= 10) {
-            filcol[0] = 5;
-            filcol[1] = 2;
-        } else if (length <= 30) {
-            filcol[0] = 10;
-            filcol[1] = 3;
-        } else if (length <= 50) {
-            filcol[0] = 20;
-            filcol[1] = 3;
+    private String[] readProducts() {
+        int cant=(jTableProducts.getRowCount()*2)+1;
+        String read[]=new String[cant];
+        for (int i = 0; i <cant; i+=2) {
+            read[i]=(String) (jTableProducts.getValueAt(i,0));
+            read[i+1]=(String)(jTableProducts.getValueAt(i+1, 1));
         }
-    return filcol;
+        read[cant-1]=String.valueOf(jTotal.getText());
+        return read;
     }
 
 }

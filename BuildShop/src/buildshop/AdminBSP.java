@@ -174,7 +174,7 @@ public abstract class AdminBSP {
     }
 
     //userRegister
-    private static String[][] userRegist(String[] users) {
+    public static String[][] userRegist(String[] users) {
         int i = 0;
         int tm = users.length / 6;
         String userList[][] = new String[tm][6];

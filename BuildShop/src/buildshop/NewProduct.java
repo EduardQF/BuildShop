@@ -15,9 +15,6 @@ import javax.swing.JOptionPane;
  */
 public class NewProduct extends javax.swing.JFrame {
 
-    /**
-     * Creates new form newProduct
-     */
     public NewProduct() {
         initComponents();
     }
@@ -39,7 +36,7 @@ public class NewProduct extends javax.swing.JFrame {
             errorName.setText("ingrese solamente letras");
         }
 
-        if (Utiles.validadorString(idProduct.getText())) {
+        if (Utiles.validadorIntPos(idProduct.getText())) {
             id = idProduct.getText();
             id2 = true;
         } else {
@@ -53,7 +50,7 @@ public class NewProduct extends javax.swing.JFrame {
             errorCant.setText("ingrese solamente numeros");
         }
 
-        if (Utiles.validadorIntPos(codigoProduct.getText())) {
+        if (Utiles.validadorMixto(codigoProduct.getText())) {
             codigo = codigoProduct.getText();
             cod = true;
         } else {
