@@ -1,4 +1,4 @@
-package BuildShop;
+package BuildShop.Data;
 
 import javax.swing.JButton;
 

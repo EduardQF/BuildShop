@@ -1,4 +1,4 @@
-package BuildShop;
+package BuildShop.Data;
 
 public class Product {
 	private String id;
@@ -8,7 +8,21 @@ public class Product {
 	private int price;
 	private int stock;
 	private String unit;
+	private boolean status;
 
+	// Constructor para lectura de archivo
+	public Product(String id, String code, String name, int cost, int price, int stock, String unit, boolean status) {
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.cost = cost;
+		this.price = price;
+		this.stock = stock;
+		this.unit = unit;
+		this.status = status;
+	}
+	
+	// Constructor para nuevos productos
 	public Product(String id, String code, String name, int cost, int price, int stock, String unit) {
 		this.id = id;
 		this.code = code;
@@ -17,6 +31,7 @@ public class Product {
 		this.price = price;
 		this.stock = stock;
 		this.unit = unit;
+		this.status = true;
 	}
 	
 
@@ -75,5 +90,14 @@ public class Product {
 	public String getUnit() {
 		return unit;
 	}
+	
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
 }
 

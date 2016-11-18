@@ -1,5 +1,5 @@
 
-package BuildShop;
+package BuildShop.Windows;
 
 import java.awt.Image;
 import java.awt.Toolkit;

@@ -1,5 +1,7 @@
 
-package BuildShop;
+package BuildShop.Windows;
+
+import BuildShop.Data.Utiles;
 
 public class EliminarVend extends javax.swing.JFrame {
 /*

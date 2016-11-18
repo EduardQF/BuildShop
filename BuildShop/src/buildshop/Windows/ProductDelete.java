@@ -1,4 +1,6 @@
-package BuildShop;
+package BuildShop.Windows;
+
+import BuildShop.Data.Utiles;
 
 /**
  *

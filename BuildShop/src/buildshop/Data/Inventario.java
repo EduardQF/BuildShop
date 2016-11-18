@@ -1,4 +1,4 @@
-package BuildShop;
+package BuildShop.Data;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import BuildShop.Windows.MesangeError;
 
 public abstract class Inventario {
     //planillas Excel
@@ -75,7 +76,7 @@ public abstract class Inventario {
     public static void excelProduct() throws Exception {
         String direccion = System.getProperty("user.home") + "/Productos.xls";
         String titulo = "Productos";
-        String title[] = {"Id", "Code", "Nombre", "Costo", "Precio", "Stock", "Unit"};
+        String title[] = {"Id", "Code", "Nombre", "Costo", "Precio", "Stock", "Unidad","Estado"};
         String product[] = DataReader.readData("C:/BuildShop/DB/products.buildshop");
         String productList[][] = AdminBSP.productRegister(product);
         created(direccion, titulo, title, productList);
@@ -84,7 +85,7 @@ public abstract class Inventario {
     public static void excelUsers() throws Exception {
         String direccion = System.getProperty("user.home") + "/Usuarios.xls";
         String titulo = "Usuarios";
-        String title[] = {"Usuario", "Contraseña", "Permiso", "Nombre", "Apellido", "correo"};
+        String title[] = {"Usuario", "Contrase�a", "Permiso", "Nombre", "Apellido", "correo","estado"};
         String users[] = DataReader.readData("C:/BuildShop/DB/users.buildshop");
         String usersList[][] = AdminBSP.userRegist(users);
         created(direccion, titulo, title, usersList);

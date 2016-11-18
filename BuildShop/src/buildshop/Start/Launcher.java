@@ -1,4 +1,7 @@
-package BuildShop;
+package BuildShop.Start;
+
+import BuildShop.Data.DataManager;
+import BuildShop.Windows.LogIn;
 
 public class Launcher {
 	public static void main(String[] args) throws InterruptedException {

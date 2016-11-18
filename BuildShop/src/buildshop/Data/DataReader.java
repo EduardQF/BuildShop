@@ -1,4 +1,4 @@
-package BuildShop;
+package BuildShop.Data;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,6 +1,13 @@
-package BuildShop;
+package BuildShop.Data;
 
 import javax.swing.JOptionPane;
+
+import BuildShop.Windows.AgreVendedor;
+import BuildShop.Windows.EliminarVend;
+import BuildShop.Windows.MesangeError;
+import BuildShop.Windows.NewProduct;
+import BuildShop.Windows.ProductDelete;
+import BuildShop.Windows.Register;
 
 public abstract class AdminBSP {
 
@@ -42,15 +49,15 @@ public abstract class AdminBSP {
     //ventas
     public static void registroVentasM() {
         if (DataManager.getAccess(0)) {
-
+            
         } else {
             mesangeError();
         }
     }
-
+    
     public static void registroVentasA() {
         if (DataManager.getAccess(1)) {
-
+            
         } else {
             mesangeError();
         }
@@ -72,7 +79,7 @@ public abstract class AdminBSP {
             mesangeError();
         }
     }
-
+    
     public static void addProduct() {
         if (DataManager.getAccess(0)) {
             NewProduct np = new NewProduct();
@@ -80,7 +87,7 @@ public abstract class AdminBSP {
         } else {
             mesangeError();
         }
-
+        
     }//listo
 
     public static void removeProduct() {
@@ -91,10 +98,10 @@ public abstract class AdminBSP {
             mesangeError();
         }
     }
-
+    
     public static void requeredProduct() {
         if (DataManager.getAccess(1)) {
-
+            
         } else {
             mesangeError();
         }
@@ -105,17 +112,17 @@ public abstract class AdminBSP {
         MesangeError me = new MesangeError();
         me.setVisible(true);
     }
-
+    
     private static String[] titulo(int i) {
         switch (i) {
             case 0:
-                String tituloa[] = {"Id", "Code", "Nombre", "Costo", "Precio", "Stock", "Unit"};
+                String tituloa[] = {"Id", "Code", "Nombre", "Costo", "Precio", "Stock", "Unit", "Estado"};
                 return tituloa;
             case 1:
                 String titulob[] = {"Id", "Code", "Nombre", "Stock"};
                 return titulob;
             default:
-                String titul[] = {"Usuario", "Contraseña", "Permiso", "Nombre", "Apellido", "correo"};
+                String titul[] = {"Usuario", "Contraseña", "Permiso", "Nombre", "Apellido", "correo", "Estado"};
                 return titul;
         }
     }
@@ -126,26 +133,28 @@ public abstract class AdminBSP {
         String productList[][] = new String[tam][4];
         //productList = {"Id","Code","Nombre","Stock"};
         System.out.println("started read");
-        for (int i = 0; i < product.length; i += 7) {
-            System.out.println("\tread:" + j);
-            productList[j][0] = product[i];
-            productList[j][1] = product[i + 1];
-            productList[j][2] = product[i + 2];
-            /*productList[j][3]=product[i+3];*/
- /*productList[j][4]=product[i+4]*/
-            productList[j][3] = product[i + 5];
-            /*productList[j][6]=product[i+6]*/
-            j++;
+        for (int i = 0; i < product.length; i += 8) {
+            if (product[i + 7].equalsIgnoreCase("true")) {
+                System.out.println("\tread:" + j);
+                productList[j][0] = product[i];
+                productList[j][1] = product[i + 1];
+                productList[j][2] = product[i + 2];
+                /*productList[j][3]=product[i+3];*/
+                /*productList[j][4]=product[i+4]*/
+                productList[j][3] = product[i + 5];
+                /*productList[j][6]=product[i+6]*/
+                j++;
+            }
         }
         return productList;
     }
-
+    
     public static String[][] productRegister(String[] product) {
         int tam = product.length / 7, j = 0;
-        String productList[][] = new String[tam][7];
-        //productList = {"Id","Code","Nombre","Costo","Precio","Stock","Unit"};
+        String productList[][] = new String[tam][8];
+        //productList = {"Id","Code","Nombre","Costo","Precio","Stock","Unit","state"};
         System.out.println("read started");
-        for (int i = 0; i < product.length; i += 7) {
+        for (int i = 0; i < product.length; i += 8) {
             System.out.println("read:" + j);
             productList[j][0] = product[i];
             productList[j][1] = product[i + 1];
@@ -154,11 +163,12 @@ public abstract class AdminBSP {
             productList[j][4] = product[i + 4];
             productList[j][5] = product[i + 5];
             productList[j][6] = product[i + 6];
+            productList[j][7] = product[i + 7];
             j++;
         }
         return productList;
     }
-
+    
     private static void readProduct(int op) {
         String product[] = DataReader.readData("C:/BuildShop/DB/products.buildshop");
         String productList[][], title[];
@@ -177,9 +187,9 @@ public abstract class AdminBSP {
     public static String[][] userRegist(String[] users) {
         int i = 0;
         int tm = users.length / 6;
-        String userList[][] = new String[tm][6];
+        String userList[][] = new String[tm][7];
         System.out.println("started read");
-        for (int j = 0; j < users.length; j += 6) {
+        for (int j = 0; j < users.length; j += 7) {
             System.out.println("read:" + i);
             userList[i][0] = users[j];
             userList[i][1] = ("******");
@@ -187,17 +197,18 @@ public abstract class AdminBSP {
             userList[i][3] = users[j + 3];
             userList[i][4] = users[j + 4];
             userList[i][5] = users[j + 5];
+            userList[i][6] = users[j + 6];
             i++;
         }
         return userList;
     }
-
+    
     private static String[][] userActiv(String[] users) {
         System.out.println("created");
         String o[][] = {{""}, {""}};
         return o;
     }
-
+    
     private static void readUsers(int op) {
         String users[] = DataReader.readData("C:/BuildShop/DB/users.buildshop");
         String usersList[][], title[];
@@ -210,7 +221,7 @@ public abstract class AdminBSP {
         }
         Register pv = new Register(title, usersList);
         pv.setVisible(true);
-
+        
     }
     
 }

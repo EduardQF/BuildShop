@@ -1,5 +1,5 @@
 
-package BuildShop;
+package BuildShop.Data;
 
 public class VentasBSP {
     

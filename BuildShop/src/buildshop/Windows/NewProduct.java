@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BuildShop;
+package BuildShop.Windows;
 
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+
+import BuildShop.Data.AgreDelete;
+import BuildShop.Data.Utiles;
 
 /**
  *

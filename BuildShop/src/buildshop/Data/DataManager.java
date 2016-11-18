@@ -1,14 +1,18 @@
-package BuildShop;
+package BuildShop.Data;
 
 import java.util.ArrayList;
+
+import BuildShop.Windows.LoadingScreen;
 
 public class DataManager {
 	private static LoadingScreen ls = new LoadingScreen();
 	private static ArrayList<User> db_user = new ArrayList<User>();
 	private static ArrayList<Client> db_client = new ArrayList<Client>();
 	private static ArrayList<Product> db_product = new ArrayList<Product>();
+	private static ArrayList<Ventas> db_ventas = new ArrayList<Ventas>();
 	private static int user_id = -1;
 	private static boolean[] user_access = new boolean[] { false, false, false };
+	
 
 	public static void showLS() {
 		ls.setVisible(true);
@@ -34,10 +38,10 @@ public class DataManager {
 		System.out.println("Reading DB");
 		String temp_db[] = DataReader.readData("C:/BuildShop/DB/users.buildshop");
 		if (temp_db.length > 5) {
-			System.out.println("UsersDB Size: " + temp_db.length + "\n" + (temp_db.length / 7) + " Users Detected");
-			for (int i = 0; i < temp_db.length; i += 6) {
+			System.out.println("UsersDB Size: " + temp_db.length + "\n" + (temp_db.length / 8) + " Users Detected");
+			for (int i = 0; i < temp_db.length; i += 7) {
 				db_user.add(new User(temp_db[i], temp_db[i + 1], temp_db[i + 2], temp_db[i + 3], temp_db[i + 4],
-						temp_db[i + 5]));
+						temp_db[i + 5], Boolean.valueOf(temp_db[i+6])));
 				System.out.println("Reading ID: " + temp_db[i]);
 			}
 		}
@@ -48,10 +52,10 @@ public class DataManager {
 		String temp_db[] = DataReader.readData("C:/BuildShop/DB/products.buildshop");
 		if (temp_db.length > 6) {
 			System.out
-					.println("ProductsDB Size: " + temp_db.length + "\n" + (temp_db.length / 8) + " Products Detected");
-			for (int i = 0; i < temp_db.length; i += 7) {
+					.println("ProductsDB Size: " + temp_db.length + "\n" + (temp_db.length / 9) + " Products Detected");
+			for (int i = 0; i < temp_db.length; i += 8) {
 				db_product.add(new Product(temp_db[i], temp_db[i + 1], temp_db[i + 2], Integer.valueOf(temp_db[i + 3]),
-						Integer.valueOf(temp_db[i + 4]), Integer.valueOf(temp_db[i + 5]), temp_db[i + 6]));
+						Integer.valueOf(temp_db[i + 4]), Integer.valueOf(temp_db[i + 5]), temp_db[i + 6], Boolean.valueOf(temp_db[i+7])));
 				System.out.println("Reading ID: " + temp_db[i]);
 			}
 		}
@@ -86,6 +90,8 @@ public class DataManager {
 			data += db_user.get(i).getLastName();
 			data += "-----";
 			data += db_user.get(i).getEmail();
+			data += "-----";
+			data += String.valueOf(db_user.get(i).getStatus());
 		}
 		DataReader.writeData("C:/BuildShop/DB/users.buildshop", data);
 	}
@@ -109,6 +115,8 @@ public class DataManager {
 			data += String.valueOf(db_product.get(i).getStock());
 			data += "-----";
 			data += db_product.get(i).getUnit();
+			data += "-----";
+			data += String.valueOf(db_product.get(i).getStatus());
 		}
 		DataReader.writeData("C:/BuildShop/DB/products.buildshop", data);
 	}
@@ -123,9 +131,56 @@ public class DataManager {
 		DataReader.writeData("C:/BuildShop/DB/clients.buildshop", data);
 	}
 
+	public static void writeVentas() {
+		String data = "";
+		for (int i = 0; i < db_ventas.size(); i++) {
+			if (i != 0) {
+				data += "-----";
+			}
+			data += db_ventas.get(i).getDate();
+			data += "-----";
+			data += db_ventas.get(i).getTime();
+			data += "-----";
+			data += db_ventas.get(i).getId();
+			data += "-----";
+			data += db_ventas.get(i).getProductID();
+			data += "-----";
+			data += db_ventas.get(i).getProductName();
+			data += "-----";
+			data += db_ventas.get(i).getProductAmmo();
+			data += "-----";
+			data += db_ventas.get(i).getProductPrice();
+			data += "-----";
+			data += db_ventas.get(i).getProductTotal();
+			data += "-----";
+			data += db_ventas.get(i).getTotal();
+			data += "-----";
+			data += db_ventas.get(i).getProductStock();
+			data += "-----";
+			data += db_ventas.get(i).getUserID();
+			data += "-----";
+			data += db_ventas.get(i).getUserName();
+		}
+		DataReader.writeData("C:/BuildShop/DB/ventas.buildshop", data);
+	}
+	
+	public static void readVentas() {
+		System.out.println("Reading Ventas");
+		String temp_db[] = DataReader.readData("C:/BuildShop/DB/ventas.buildshop");
+		if (temp_db.length > 6) {
+			System.out
+					.println("VentasDB Size: " + temp_db.length + "\n" + (temp_db.length / 11) + " Ventas Detected");
+			for (int i = 0; i < temp_db.length; i += 10) {
+				db_ventas.add(new Ventas(temp_db[i], temp_db[i + 1], temp_db[i + 2], temp_db[i + 3],
+						temp_db[i + 4], temp_db[i + 5], temp_db[i + 6], temp_db[i+7],temp_db[i+8], temp_db[i+9]));
+				System.out.println("Reading ID: " + temp_db[i]);
+			}
+		}
+	}
+	
 	public static boolean findUser(String user, String pass) {
 		for (int i = 0; i < db_user.size(); i++) {
-			if (user.equalsIgnoreCase(db_user.get(i).getID()) && pass.equals(db_user.get(i).getPassword())) {
+			if (user.equalsIgnoreCase(db_user.get(i).getID()) && pass.equals(db_user.get(i).getPassword()) && db_user.get(i).getStatus() == true) {
 				user_id = i;
 				if (db_user.get(i).getAccess().equals("admin")) {
 					user_access[0] = true;

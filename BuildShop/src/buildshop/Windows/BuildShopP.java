@@ -1,10 +1,18 @@
-package BuildShop;
+package BuildShop.Windows;
 
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.*;
+
+import BuildShop.Data.AdminBSP;
+import BuildShop.Data.DataManager;
+import BuildShop.Data.DataReader;
+import BuildShop.Data.Inventario;
+import BuildShop.Data.Producto;
+import BuildShop.Data.Utiles;
+import BuildShop.Data.VentasBSP;
 
 /**
  *
@@ -40,7 +48,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         deletePventa = new javax.swing.JButton();
         addOne = new javax.swing.JButton();
         deleteOne = new javax.swing.JButton();
-        jbusquedaç = new javax.swing.JTextField();
+        jbusqued = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jcreatedSell = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -330,7 +338,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbusquedaç, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbusqued, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,7 +362,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jbusquedaç, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbusqued, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)
                                 .addComponent(jButton1))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -473,7 +481,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JTable jTableProducts;
     private javax.swing.JTextField jTotal;
     private javax.swing.JPanel jVenta;
-    private javax.swing.JTextField jbusquedaç;
+    private javax.swing.JTextField jbusqued;
     private javax.swing.JButton jcreatedSell;
     private javax.swing.JMenuItem jregistrosUsers;
     private javax.swing.JMenuItem modificarWorker;
@@ -548,7 +556,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
 
     }
 
-    //añade filas de productos a 
+    //a�ade filas de productos a 
     private void addProduct(int x, Producto boton) {
         int valor = Integer.valueOf(String.valueOf(jTableProducts.getValueAt(x, 1)));
         int v[] = VentasBSP.valores(boton, valor);

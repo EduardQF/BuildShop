@@ -1,10 +1,23 @@
-package BuildShop;
+package BuildShop.Data;
 
 public class User extends Person{
 	private String id;
 	private String password;
 	private String access;
+	private boolean status;
 
+	// Constructor para lectura de archivo
+	public User(String id, String password, String access, String firstname, String lastname, String email, boolean status) {
+		this.id = id;
+		this.password = password;
+		this.access = access;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.status = status;
+	}
+	
+	// Constructor para nuevos usuarios
 	public User(String id, String password, String access, String firstname, String lastname, String email) {
 		this.id = id;
 		this.password = password;
@@ -12,6 +25,7 @@ public class User extends Person{
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
+		this.status = true;
 	}
 
 	public void setID(String s) {
@@ -36,6 +50,22 @@ public class User extends Person{
 
 	public String getAccess() {
 		return access;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 }

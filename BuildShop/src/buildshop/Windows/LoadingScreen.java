@@ -1,4 +1,4 @@
-package BuildShop;
+package BuildShop.Windows;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

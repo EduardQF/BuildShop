@@ -1,4 +1,4 @@
-package BuildShop;
+package BuildShop.Data;
 
 public class Person {
 	protected String firstname;

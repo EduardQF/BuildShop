@@ -1,11 +1,10 @@
 
-package BuildShop;
-
+package BuildShop.Data;
 
 public abstract class AgreDelete {
     
     
-    static void newUser(String firstname, String lastname, String rut, String clave, String email, String acces) {
+    public static void newUser(String firstname, String lastname, String rut, String clave, String email, String acces) {
         if(acces=="Administrador"){
             acces="Admin";
         }else if(acces=="Inventario"){
@@ -22,7 +21,7 @@ public abstract class AgreDelete {
     
     }
     
-    static void newProduct(String producto, String id, String cantidad, String codigo, String precioVenta, String costo, String unit, String descripcion) {
+    public static void newProduct(String producto, String id, String cantidad, String codigo, String precioVenta, String costo, String unit, String descripcion) {
         int cost=Integer.parseInt(costo);
         int price=Integer.parseInt(precioVenta);
         int stoc=Integer.parseInt(cantidad);
