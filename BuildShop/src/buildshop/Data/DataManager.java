@@ -147,7 +147,7 @@ public class DataManager {
 			data += "-----";
 			data += db_ventas.get(i).getProductName();
 			data += "-----";
-			data += db_ventas.get(i).getProductAmmo();
+			data += db_ventas.get(i).getProductAmmo();//cantidad
 			data += "-----";
 			data += db_ventas.get(i).getProductPrice();
 			data += "-----";

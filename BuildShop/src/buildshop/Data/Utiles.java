@@ -133,4 +133,8 @@ public  class Utiles {
         return(nombre.equals(String.valueOf(valueAt)));
     }
 
+    public static boolean comparador(String text, String text0) {
+        return text.equals(text0);
+    }
+
 }

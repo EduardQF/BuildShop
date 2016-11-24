@@ -1,6 +1,7 @@
 package BuildShop.Windows;
 
-import BuildShop.Data.Utiles;
+import BuildShop.Data.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,17 +16,26 @@ public class ProductDelete extends javax.swing.JFrame {
     public void eliminarProducto() {
         String idp = "", clavep = "";
         boolean fa = false, i = fa, c = fa;
-        if (Utiles.validadorString(jTextField1.getText())) {
-            idp = jTextField1.getText();
+        if (Utiles.validadorIntPos(jTextID.getText())) {
+            idp = jTextID.getText();
             i = true;
         } else {
             jLabel3.setText("ingrese solamente letras");
         }
-        if (Utiles.validarClave(jPasswordField1.getText())) {
-            clavep = jPasswordField1.getText();
-            c = true;
-        } else {
-            jLabel4.setText("ingrese solo letras y numeros");
+        for (int j = 0; j < DataManager.getUsersSize(); j++) {
+            if (Utiles.validarClave(jPasswordField1.getText()) && Utiles.comparador(jPasswordField1.getText(), DataManager.getUser(j).getPassword())) {
+                clavep = jPasswordField1.getText();
+                c = true;
+                break;
+            } else {
+                jLabel4.setText("ingrese solo letras y numeros");
+            }
+        }
+
+        if (i && c) {
+            limpiar();
+            AgreDelete.deleteProduct(idp);
+            JOptionPane.showMessageDialog(null, "Eliminado");
         }
 
     }
@@ -37,12 +47,12 @@ public class ProductDelete extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
+        jTextID = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Id Producto");
 
@@ -66,7 +76,7 @@ public class ProductDelete extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -75,21 +85,21 @@ public class ProductDelete extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1))
+                            .addComponent(jTextID, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))))
-                .addContainerGap(138, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -98,7 +108,7 @@ public class ProductDelete extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -112,14 +122,6 @@ public class ProductDelete extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductDelete().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -128,6 +130,11 @@ public class ProductDelete extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextID;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiar() {
+        jLabel3.setText("");
+        jLabel4.setText("");
+    }
 }

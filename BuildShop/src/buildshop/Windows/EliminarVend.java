@@ -1,12 +1,11 @@
 
 package BuildShop.Windows;
 
-import BuildShop.Data.Utiles;
+import BuildShop.Data.*;
+import javax.swing.JOptionPane;
 
 public class EliminarVend extends javax.swing.JFrame {
-/*
- ahutor Carrion Cristo, Darigo Giaccomo, Queupumil Eduardo.    
-*/
+
 
     public EliminarVend() {
         initComponents();
@@ -25,8 +24,9 @@ public class EliminarVend extends javax.swing.JFrame {
         jMensaje2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Eliminar Vendedor");
 
-        jLabel1.setText("Rut Vendedor:");
+        jLabel1.setText("Rut Usuario:");
 
         jLabel2.setText("clave Administrador:");
 
@@ -61,20 +61,19 @@ public class EliminarVend extends javax.swing.JFrame {
                             .addComponent(JEliminar)
                             .addComponent(Jclave))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jMensaje1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jMensaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jMensaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMensaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(JRut, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jMensaje1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JRut, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMensaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -82,7 +81,7 @@ public class EliminarVend extends javax.swing.JFrame {
                     .addComponent(jMensaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JEliminar)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,7 +89,7 @@ public class EliminarVend extends javax.swing.JFrame {
 
     private void JEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarActionPerformed
         limpiar();
-        String rut, clave;
+        String rut="", clave,text="";
         boolean ru=false,cl=false;
         
         if(Utiles.validarRut(JRut.getText())){
@@ -100,11 +99,21 @@ public class EliminarVend extends javax.swing.JFrame {
             jMensaje1.setText("Rut invalido");
         }
         
-        if(Utiles.validarClave(Jclave.getText())){
-            clave=Jclave.getText();
-            cl=true;
-        }else{
-            jMensaje2.setText("ingrese solo letras y numeros");
+        for (int i = 0; i < DataManager.getUsersSize(); i++) {
+            text=DataManager.getUser(i).getPassword();
+            if(Utiles.validarClave(Jclave.getText())&&Utiles.comparador(text,Jclave.getText())){
+                clave=Jclave.getText();
+                cl=true;
+                break;
+            }else{
+                jMensaje2.setText("ingrese solo letras y numeros");
+        }
+        }
+        
+        if(ru&&cl){
+            limpiar();
+            AgreDelete.deleteUser(rut);
+            JOptionPane.showMessageDialog(null, "Eliminado");
         }
     }//GEN-LAST:event_JEliminarActionPerformed
 

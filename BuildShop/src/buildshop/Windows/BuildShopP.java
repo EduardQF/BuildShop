@@ -6,13 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.*;
 
-import BuildShop.Data.AdminBSP;
-import BuildShop.Data.DataManager;
-import BuildShop.Data.DataReader;
-import BuildShop.Data.Inventario;
-import BuildShop.Data.Producto;
-import BuildShop.Data.Utiles;
-import BuildShop.Data.VentasBSP;
+import BuildShop.Data.*;
 
 /**
  *
@@ -107,7 +101,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
 
             },
             new String [] {
-                "Producto", "Cantidad", "Precio Unitario", "Precio Total"
+                "Producto", "Codigo", "Cantidad", "Precio Unitario", "Precio Total"
             }
         ));
         jScrollPane1.setViewportView(jTableProducts);
@@ -138,10 +132,25 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         );
 
         deletePventa.setText("Eliminar");
+        deletePventa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletePventaActionPerformed(evt);
+            }
+        });
 
         addOne.setText("Agregar");
+        addOne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addOneActionPerformed(evt);
+            }
+        });
 
         deleteOne.setText("Quitar");
+        deleteOne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteOneActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Busqueda:");
 
@@ -332,7 +341,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
                 .addComponent(jPanelBotonProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -445,9 +454,23 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jregistrosUsersActionPerformed
 
     private void jcreatedSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcreatedSellActionPerformed
-        String []productsSell=readProducts();
+        String[] productsSell = readProducts();
         VentasBSP.generateSell(productsSell);
     }//GEN-LAST:event_jcreatedSellActionPerformed
+
+    private void deletePventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePventaActionPerformed
+        deleteRow();
+    }//GEN-LAST:event_deletePventaActionPerformed
+
+    private void deleteOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOneActionPerformed
+        deletecant();
+    }//GEN-LAST:event_deleteOneActionPerformed
+
+    private void addOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOneActionPerformed
+          int x=jTableProducts.getSelectedRow();
+          int priu=Integer.valueOf(String.valueOf(jTableProducts.getValueAt(x, 3)));
+          addProduct(x, priu);
+    }//GEN-LAST:event_addOneActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -502,32 +525,36 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         String product[] = DataReader.readData("C:/BuildShop/DB/products.buildshop");
         String productList[][] = AdminBSP.productRegister(product);
         int[] fc = VentasBSP.filcol(productList.length);
-
         this.jPanelBotonProductos.setLayout(new java.awt.GridLayout(fc[0], fc[1]));
         for (int filas = 0; filas < fc[0]; filas++) {
             for (int columnas = 0; columnas < fc[1]; columnas++) {
                 if (cont < productList.length) {
-                    System.out.println("boton:" + cont);
-                    Producto cuadro = new Producto(productList[cont][0], productList[cont][1],
-                            productList[cont][2], productList[cont][3],
-                            productList[cont][4], productList[cont][5]);
-                    cuadro.addActionListener((ActionListener) this);
-                    cuadro.setText(cuadro.getName());
-                    cuadro.setVisible(true);
-                    jPanelBotonProductos.add(cuadro);
+                    System.out.println(" productList[" + cont + "][7]:" + productList[cont][7]);
+                    if (productList[cont][7].equalsIgnoreCase("true")) {
+                        System.out.println("boton:" + cont);
+                        Producto cuadro = new Producto(productList[cont][0], productList[cont][1],
+                                productList[cont][2], productList[cont][3],
+                                productList[cont][4], productList[cont][5]);
+                        cuadro.addActionListener((ActionListener) this);
+                        cuadro.setText(cuadro.getName());
+                        jPanelBotonProductos.add(cuadro);
+                    }
                     cont++;
                 } else {
                     break;
                 }
             }
         }
+
+        System.out.println("create complet");
     }
-    
+
     //entrega la acciones
     @Override
     public void actionPerformed(ActionEvent e) {
         DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
         Producto boton = (Producto) e.getSource();
+        String code=boton.getCode();
         int cant = 1, position = 0;
         int valorT = boton.getPrice() * cant;
         boolean state = false;
@@ -543,36 +570,81 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
                     break;
                 }
             }
-
+            
             if (state) {
                 System.out.println("modifict\nvalor: " + jTableProducts.getValueAt(position, 1));
-                addProduct(position, boton);
+                addProduct(position, boton.getPrice());
                 System.out.println("add cant");
             } else {
                 model.addRow(VentasBSP.created(boton, cant, valorT));
                 System.out.println("add to Sell");
             }
+   
         }
+        mostTotal();
+    }
+
+    //añade filas de productos añaddidos al carro a la tabla
+    private void addProduct(int row, int price) {
+        System.out.println("add one product");
+        int valor = Integer.valueOf(String.valueOf(jTableProducts.getValueAt(row, 2)));
+        String v[] = VentasBSP.valores(price, valor,0);
+        actualizar(v, row);
 
     }
 
-    //a�ade filas de productos a 
-    private void addProduct(int x, Producto boton) {
-        int valor = Integer.valueOf(String.valueOf(jTableProducts.getValueAt(x, 1)));
-        int v[] = VentasBSP.valores(boton, valor);
-        jTableProducts.setValueAt(v[0], x, 1);
-        jTableProducts.setValueAt(v[1], x, 3);
-    }
-
+    //lee los productos desde la tabla para generar la venta
     private String[] readProducts() {
-        int cant=(jTableProducts.getRowCount()*2)+1;
-        String read[]=new String[cant];
-        for (int i = 0; i <cant; i+=2) {
-            read[i]=(String) (jTableProducts.getValueAt(i,0));
-            read[i+1]=(String)(jTableProducts.getValueAt(i+1, 1));
+        int cant = (jTableProducts.getRowCount() * 2) + 1;
+        System.out.println("GV\ncantP:" + cant);
+        String read[] = new String[cant];
+        int sig = 0;
+        for (int i = 0; i < cant - 1; i += 2) {
+            System.out.println("product:" + jTableProducts.getValueAt(sig, 0) + ""
+                    + "\ncant:" + jTableProducts.getValueAt(sig, 1));
+            read[i] = String.valueOf(jTableProducts.getValueAt(sig, 0));
+            read[i + 1] = String.valueOf(jTableProducts.getValueAt(sig, 1));
+            sig++;
         }
-        read[cant-1]=String.valueOf(jTotal.getText());
+        read[cant - 1] = String.valueOf(jTotal.getText());
         return read;
     }
+
+    //muestra el total de lo que tiene el carro
+    private void mostTotal() {
+        System.out.println("most ");
+        int total=0;
+        for (int i = 0; i < jTableProducts.getRowCount(); i++) {
+            System.out.println("i:"+jTableProducts.getValueAt(i, 3));
+                total = total + Integer.parseInt(String.valueOf(jTableProducts.getValueAt(i, 4)));
+            }
+            System.out.println("total:" + total);
+            jTotal.setText("$"+String.valueOf(total));
+   }
+
+    /*quita la fila seleccionda*/
+    private void deleteRow() {
+        System.out.println("remove rowd");
+        DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
+        model.removeRow(jTableProducts.getSelectedRow());
+        mostTotal();
+    }
+
+    /*resta en 1 el producto seleccionado*/
+    private void deletecant() {
+        System.out.println("remove one product");
+        int row=jTableProducts.getSelectedRow();
+        int valor = Integer.valueOf(String.valueOf(jTableProducts.getValueAt(row, 2)));
+        int price=Integer.valueOf(String.valueOf(jTableProducts.getValueAt(row, 3)));
+        String v[] = VentasBSP.valores(price, valor,1);
+        actualizar(v, row);
+        
+    }
+    private void actualizar(String[]v,int x){
+        jTableProducts.setValueAt(v[0], x, 2);
+        jTableProducts.setValueAt(v[1], x, 4);
+        mostTotal();
+    }
+    
 
 }
