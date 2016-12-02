@@ -22,6 +22,8 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
 
     }
 
+    /*metodo encargado de encontrar y guardar una imagen desde la carpeta 
+     *especificada y guardarla en una variable que luego sera ocupada en las pantallas*/
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage("C:/BuildShop/IMG/Logo64x64.png");
@@ -66,9 +68,6 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         addWorker = new javax.swing.JMenuItem();
         deleteWorker = new javax.swing.JMenuItem();
         estadisticas = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        ventasMens = new javax.swing.JMenuItem();
-        ventasAnu = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jRegistroVentas = new javax.swing.JMenuItem();
         jRegistroProductos = new javax.swing.JMenuItem();
@@ -280,26 +279,6 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
 
         estadisticas.setText("Estadisticas");
 
-        jMenu4.setText("Generar Graficos ");
-
-        ventasMens.setText("Ventas Mensuales");
-        ventasMens.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ventasMensActionPerformed(evt);
-            }
-        });
-        jMenu4.add(ventasMens);
-
-        ventasAnu.setText("Ventas Anuales");
-        ventasAnu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ventasAnuActionPerformed(evt);
-            }
-        });
-        jMenu4.add(ventasAnu);
-
-        estadisticas.add(jMenu4);
-
         jMenu6.setText("Generar Excel");
 
         jRegistroVentas.setText("Registro de ventas");
@@ -433,14 +412,6 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         AdminBSP.removeProduct();
     }//GEN-LAST:event_QuitarProductosActionPerformed
 
-    private void ventasMensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasMensActionPerformed
-        Inventario.generateGraficM();
-    }//GEN-LAST:event_ventasMensActionPerformed
-
-    private void ventasAnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasAnuActionPerformed
-        Inventario.generateGraficA();
-    }//GEN-LAST:event_ventasAnuActionPerformed
-
     private void jRegistroVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistroVentasActionPerformed
         Inventario.planilla_Ventas();
     }//GEN-LAST:event_jRegistroVentasActionPerformed
@@ -490,7 +461,6 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
@@ -513,11 +483,9 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenuItem registroMensual;
     private javax.swing.JMenuItem stock;
     private javax.swing.JMenuItem usersActived;
-    private javax.swing.JMenuItem ventasAnu;
-    private javax.swing.JMenuItem ventasMens;
     // End of variables declaration//GEN-END:variables
 
-    //crea botones de los productos
+    /*crea botones de los productos*/
     private void mostBotonsProduct() {
         System.out.println("creating botons..");
         this.jPanelBotonProductos.removeAll();
@@ -549,7 +517,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         System.out.println("create complet");
     }
 
-    //entrega la acciones
+    /*entrega la acciones*/
     @Override
     public void actionPerformed(ActionEvent e) {
         DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
@@ -584,7 +552,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         mostTotal();
     }
 
-    //añade filas de productos añaddidos al carro a la tabla
+    /*añade filas de productos añaddidos al carro a la tabla*/
     private void addProduct(int row, int price) {
         System.out.println("add one product");
         int valor = Integer.valueOf(String.valueOf(jTableProducts.getValueAt(row, 2)));
@@ -593,7 +561,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
 
     }
 
-    //lee los productos desde la tabla para generar la venta
+    /*lee los productos desde la tabla para generar la venta*/
     private String[] readProducts() {
         int cant = (jTableProducts.getRowCount() * 2) + 1;
         System.out.println("GV\ncantP:" + cant);
@@ -610,7 +578,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         return read;
     }
 
-    //muestra el total de lo que tiene el carro
+    /*muestra el total de lo que tiene el carro*/
     private void mostTotal() {
         System.out.println("most ");
         int total=0;
@@ -640,6 +608,8 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         actualizar(v, row);
         
     }
+    
+    /*actualiza los valores de la tabla*/
     private void actualizar(String[]v,int x){
         jTableProducts.setValueAt(v[0], x, 2);
         jTableProducts.setValueAt(v[1], x, 4);

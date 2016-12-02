@@ -1,6 +1,8 @@
 package BuildShop.Windows;
 
 import BuildShop.Data.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +15,7 @@ public class ProductDelete extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void eliminarProducto() {
+    private void eliminarProducto() {
         String idp = "", clavep = "";
         boolean fa = false, i = fa, c = fa;
         if (Utiles.validadorIntPos(jTextID.getText())) {
@@ -40,6 +42,12 @@ public class ProductDelete extends javax.swing.JFrame {
 
     }
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage("C:/BuildShop/IMG/Logo64x64.png");
+        return retValue;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,6 +61,8 @@ public class ProductDelete extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(getIconImage());
+        setIconImages(getIconImages());
 
         jLabel1.setText("Id Producto");
 
@@ -133,6 +143,7 @@ public class ProductDelete extends javax.swing.JFrame {
     private javax.swing.JTextField jTextID;
     // End of variables declaration//GEN-END:variables
 
+    /*metodo encargado de la limpieza de las jLeabels que muestran los errores*/
     private void limpiar() {
         jLabel3.setText("");
         jLabel4.setText("");

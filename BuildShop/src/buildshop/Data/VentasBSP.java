@@ -3,13 +3,13 @@ package BuildShop.Data;
 public class VentasBSP {
 
     //botones.
-    /*datos para crear un boton*/
+    /*datos para crear los botones de productos*/
     public static String[] created(Producto boton, int cant, int valorT) {
         String[] dataTable = {boton.getName(), boton.getCode(), String.valueOf(cant), String.valueOf(boton.getPrice()), String.valueOf(valorT)};
         return dataTable;
     }
 
-    /*datos para agregar a la tabla*/
+    /*datos para modificar datos de la tablas de ventas*/
     public static String[] valores(int cost, int valor, int op) {
         int cant;
         if (op == 0) {
@@ -27,17 +27,6 @@ public class VentasBSP {
         return v;
     }
 
-    /*datos para quitar de uno de la tabla*/
-   /* public static String[] valoresRe(int price, int valor) {
-        int cant;
-
-        System.out.println(".");
-        int valorT = price * cant;
-        String v1 = String.valueOf(cant);
-        String v2 = String.valueOf(valorT);
-        String v[] = {v1, v2};
-        return v;
-    }*/
 
     /*datos para generar filas y columnas de botones*/
     public static int[] filcol(int length) {
@@ -55,7 +44,7 @@ public class VentasBSP {
         return filcol;
     }
 
-    //ventas
+    /*ventas generadas*/
     public static void generateSell(String[] productsSell) {
 
     }

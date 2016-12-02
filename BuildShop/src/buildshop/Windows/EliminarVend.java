@@ -2,6 +2,8 @@
 package BuildShop.Windows;
 
 import BuildShop.Data.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class EliminarVend extends javax.swing.JFrame {
@@ -9,6 +11,12 @@ public class EliminarVend extends javax.swing.JFrame {
 
     public EliminarVend() {
         initComponents();
+    }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage("C:/BuildShop/IMG/Logo64x64.png");
+        return retValue;
     }
 
     @SuppressWarnings("unchecked")
@@ -25,16 +33,12 @@ public class EliminarVend extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminar Vendedor");
+        setIconImage(getIconImage());
+        setIconImages(getIconImages());
 
         jLabel1.setText("Rut Usuario:");
 
         jLabel2.setText("clave Administrador:");
-
-        Jclave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JclaveActionPerformed(evt);
-            }
-        });
 
         JEliminar.setText("Eliminar");
         JEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,15 +74,17 @@ public class EliminarVend extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JRut, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMensaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jMensaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JRut, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Jclave, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMensaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jMensaje2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Jclave, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JEliminar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -89,6 +95,27 @@ public class EliminarVend extends javax.swing.JFrame {
 
     private void JEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminarActionPerformed
         limpiar();
+        eliminar();
+    }//GEN-LAST:event_JEliminarActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JEliminar;
+    private javax.swing.JTextField JRut;
+    private javax.swing.JPasswordField Jclave;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jMensaje1;
+    private javax.swing.JLabel jMensaje2;
+    // End of variables declaration//GEN-END:variables
+
+    private void limpiar() {
+        jMensaje1.setText("");
+        jMensaje2.setText("");
+    }
+
+    private void eliminar() {
+        
         String rut="", clave,text="";
         boolean ru=false,cl=false;
         
@@ -105,9 +132,10 @@ public class EliminarVend extends javax.swing.JFrame {
                 clave=Jclave.getText();
                 cl=true;
                 break;
-            }else{
-                jMensaje2.setText("ingrese solo letras y numeros");
+            }
         }
+        if(!cl){
+            jMensaje2.setText("ingrese solo letras y numeros");
         }
         
         if(ru&&cl){
@@ -115,25 +143,5 @@ public class EliminarVend extends javax.swing.JFrame {
             AgreDelete.deleteUser(rut);
             JOptionPane.showMessageDialog(null, "Eliminado");
         }
-    }//GEN-LAST:event_JEliminarActionPerformed
-
-    private void JclaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JclaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JclaveActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JEliminar;
-    private javax.swing.JTextField JRut;
-    private javax.swing.JPasswordField Jclave;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jMensaje1;
-    private javax.swing.JLabel jMensaje2;
-    // End of variables declaration//GEN-END:variables
-
-    private void limpiar() {
-        jMensaje1.setText("");
-        jMensaje2.setText("");
     }
 }

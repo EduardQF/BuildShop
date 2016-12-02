@@ -13,7 +13,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import BuildShop.Windows.MesangeError;
 
 public abstract class Inventario {
-    //planillas Excel
+    /*planillas Excel*/
+    
+    /*valida el acceso del usuario para llamar al metodo excelProduct o ha mesangeError*/
     public static void planilla_Productos() {
         if (DataManager.getAccess(0)) {
             try {
@@ -25,7 +27,8 @@ public abstract class Inventario {
             mesangeError();
         }
     }
-
+    
+    /*valida el acceso del usuario para llamar al metodo excelPUsers o ha mesangeError*/
     public static void planilla_Ventas() {
         if (DataManager.getAccess(0)) {
             try {
@@ -38,6 +41,7 @@ public abstract class Inventario {
         }
     }
 
+    /*valida el acceso del usuario para llamar al metodo excelSells o ha mesangeError*/
     public static void planilla_Usuarios() {
         if (DataManager.getAccess(0)) {
             try {
@@ -49,30 +53,20 @@ public abstract class Inventario {
             mesangeError();
         }
     }
-    //Graficos
-    public static void generateGraficM() {
-        if (DataManager.getAccess(0)) {
+    
+    
 
-        } else {
-            mesangeError();
-        }
-    }
-
-    public static void generateGraficA() {
-        if (DataManager.getAccess(0)) {
-
-        } else {
-            mesangeError();
-        }
-    }
-
-    //other
+    /*other*/
+    
+    /*metodo que envia un mensaje de error*/
     private static void mesangeError() {
         MesangeError me = new MesangeError();
         me.setVisible(true);
     }
     
-    //new
+    /*new*/
+    
+    /*metodos que entrega los datos para excels con los datos de los productos*/
     public static void excelProduct() throws Exception {
         String direccion = System.getProperty("user.home") + "/Productos.xls";
         String titulo = "Productos";
@@ -82,6 +76,7 @@ public abstract class Inventario {
         created(direccion, titulo, title, productList);
     }
 
+    /*metodos que entrega los datos para excels con los datos de los Usuarios*/
     public static void excelUsers() throws Exception {
         String direccion = System.getProperty("user.home") + "/Usuarios.xls";
         String titulo = "Usuarios";
@@ -92,6 +87,7 @@ public abstract class Inventario {
 
     }
 
+    /*metodos que entrega los datos para excels con los datos de las ventas*/
     public static void excelSells()throws Exception {
         String direccion = System.getProperty("user.home") + "/Ventas.xls";
         String titulo = "Ventas";
@@ -101,10 +97,11 @@ public abstract class Inventario {
         //created(direccion,titulo,sells,sellsList);
     }//modificar
 
-    //craete graficos
     
     
-    //create Excels
+    /*create Excels*/
+    
+    /*metodos que crean la planilla excel*/
     public static void created(String rutaArchivo, String tipo, String[] title, String[][] List) throws Exception {
         File archivoXLS = new File(rutaArchivo);
         if (archivoXLS.exists()) {
@@ -120,6 +117,7 @@ public abstract class Inventario {
         Desktop.getDesktop().open(archivoXLS);
     }
 
+    /*metodos encargado de rellenar la planilla con los datos*/
     private static void rellenarMio(Sheet hoja, String[][] productList, String[] title) {
         System.out.println("comienso excel");
         for (int filas = 0; filas < productList.length + 1; filas++) {

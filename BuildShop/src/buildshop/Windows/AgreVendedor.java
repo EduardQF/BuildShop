@@ -175,6 +175,51 @@ public class AgreVendedor extends javax.swing.JFrame {
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
         limpiar();
+        agregar();
+        
+    }//GEN-LAST:event_jAgregarActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JApellido;
+    private javax.swing.JTextField JClave;
+    private javax.swing.JTextField JEdad;
+    private javax.swing.JTextField JNombre;
+    private javax.swing.JTextField JRut;
+    private javax.swing.JLabel Jmesannge;
+    private javax.swing.JLabel Jmesannge1;
+    private javax.swing.JLabel Jmesannge2;
+    private javax.swing.JLabel Jmesannge3;
+    private javax.swing.JLabel Jmesannge4;
+    private javax.swing.JLabel acceso;
+    private javax.swing.JLabel clave;
+    private javax.swing.JComboBox<String> jAcces;
+    private javax.swing.JButton jAgregar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jemail;
+    // End of variables declaration//GEN-END:variables
+
+    /*metodo de limpieza de leabels en pantalla */
+    private void limpiar() {
+        Jmesannge.setText("");
+        Jmesannge1.setText("");
+        Jmesannge2.setText("");
+        Jmesannge3.setText("");
+        Jmesannge4.setText("");
+              
+    }
+    
+    
+    /*obtiene los balores de los campos de textos y segun la validacion 
+    * lo almacena en una vareable o envia un mensaje de error, cuando todas las 
+    *validaciones son correctas llama a un metodo encargado de almasenar a el 
+    * Usuario en la base de datos.
+    */
+    private void agregar() {
         String firstname="",lastname="",rut="",clave="",email="",acces;
         boolean fa=false,no=fa,ap=fa,ed=fa,ru=fa,cl=fa,em=fa;
         int edad=0;
@@ -223,38 +268,5 @@ public class AgreVendedor extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_jAgregarActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField JApellido;
-    private javax.swing.JTextField JClave;
-    private javax.swing.JTextField JEdad;
-    private javax.swing.JTextField JNombre;
-    private javax.swing.JTextField JRut;
-    private javax.swing.JLabel Jmesannge;
-    private javax.swing.JLabel Jmesannge1;
-    private javax.swing.JLabel Jmesannge2;
-    private javax.swing.JLabel Jmesannge3;
-    private javax.swing.JLabel Jmesannge4;
-    private javax.swing.JLabel acceso;
-    private javax.swing.JLabel clave;
-    private javax.swing.JComboBox<String> jAcces;
-    private javax.swing.JButton jAgregar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jemail;
-    // End of variables declaration//GEN-END:variables
-
-    private void limpiar() {
-        Jmesannge.setText("");
-        Jmesannge1.setText("");
-        Jmesannge2.setText("");
-        Jmesannge3.setText("");
-        Jmesannge4.setText("");
-              
     }
 }

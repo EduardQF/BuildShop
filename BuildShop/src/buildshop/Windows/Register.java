@@ -58,6 +58,9 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*metodo encargado de almacenar en las variables locales los valores 
+    *entregados en title y list, que son el titulo de la tabla y el contenido
+    *de esta respectivamente */
     private void read(String[] title, String[][] list) {
         userTitle=title;
         userList=list;

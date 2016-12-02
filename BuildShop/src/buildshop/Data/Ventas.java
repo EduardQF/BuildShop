@@ -4,18 +4,18 @@ import java.util.Calendar;
 
 @SuppressWarnings("deprecation")
 public class Ventas {
-	private String date;			//	fecha de la venta, formato año-mes-dia
-	private String time;			//	hora de la venta, formato 24hrs
-	private String id;				//	id de venta... num boleta?
-	private String productID;		//	id producto
-	private String productName;		//	nombre del producto
-	private String productAmmo;		//	cantidad vendida
-	private String productPrice;	//	precio unitario
-	private String productTotal;	//	precio total de este producto
-	private String total;			//	valor total de la boleta
-	private String productStock;	//	stock post-venta
-	private String userID;			//	id vendedor
-	private String userName;		//	nombre(+apellido?) vendedor
+	private String date;			/*	fecha de la venta, formato aï¿½o-mes-dia*/
+	private String time;			/*	hora de la venta, formato 24hrs*/
+	private String id;			/*	id de venta... num boleta?*/
+	private String productID;		/*	id producto*/
+	private String productName;		/*	nombre del producto*/
+	private String productAmmo;		/*	cantidad vendida*/
+	private String productPrice;            /*	precio unitario*/
+	private String productTotal;            /*	precio total de este producto*/
+	private String total;			/*	valor total de la boleta*/
+	private String productStock;            /*	stock post-venta*/
+	private String userID;			/*	id vendedor*/
+	private String userName;		/*	nombre(+apellido?) vendedor*/
 	
 	// Constructor para nuevas ventas.
 	public Ventas(String id,String productID,String productName,String productAmmo,

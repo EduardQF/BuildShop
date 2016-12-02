@@ -11,7 +11,10 @@ import BuildShop.Windows.Register;
 
 public abstract class AdminBSP {
 
-    //personal 
+    /*personal*/
+    
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama la clase AgreVendedor, sino llama a un metodo mesangeError*/
     public static void addWorker() {
         if (DataManager.getAccess(0)) {
             AgreVendedor vend = new AgreVendedor();
@@ -21,6 +24,8 @@ public abstract class AdminBSP {
         }
     }//listo
 
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama la clase EliminarVend, sino llama a un metodo mesangeError*/
     public static void removeWorker() {
         if (DataManager.getAccess(0)) {
             EliminarVend elim = new EliminarVend();
@@ -30,6 +35,8 @@ public abstract class AdminBSP {
         }
     }//listo
 
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama al metodo readUsers, sino llama a un metodo mesangeError*/
     public static void usersActived() {
         if (DataManager.getAccess(0)) {
             readUsers(1);
@@ -38,6 +45,8 @@ public abstract class AdminBSP {
         }
     }//listo
 
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama al metodo readUsers, sino llama a un metodo mesangeError*/
     public static void registerUsers() {
         if (DataManager.getAccess(0)) {
             readUsers(0);
@@ -46,7 +55,10 @@ public abstract class AdminBSP {
         }
     }//listo
 
-    //ventas
+    /*ventas*/
+    
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama al metodo ----, sino llama a un metodo mesangeError*/
     public static void registroVentasM() {
         if (DataManager.getAccess(0)) {
             
@@ -55,6 +67,8 @@ public abstract class AdminBSP {
         }
     }
     
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama al metodo ----, sino llama a un metodo mesangeError*/
     public static void registroVentasA() {
         if (DataManager.getAccess(1)) {
             
@@ -64,6 +78,9 @@ public abstract class AdminBSP {
     }
 
     //productos
+    
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama al metodo readProduct, sino llama a un metodo mesangeError*/
     public static void registroProduct() {
         if (DataManager.getAccess(1)) {
             readProduct(1);
@@ -72,6 +89,9 @@ public abstract class AdminBSP {
         }
     }//listo
 
+    
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama al metodo readProduct, sino llama a un metodo mesangeError*/
     public static void stock() {
         if (DataManager.getAccess(1)) {
             readProduct(2);
@@ -80,6 +100,8 @@ public abstract class AdminBSP {
         }
     }
     
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama a la clase addProduct, sino llama a un metodo mesangeError*/
     public static void addProduct() {
         if (DataManager.getAccess(0)) {
             NewProduct np = new NewProduct();
@@ -90,6 +112,8 @@ public abstract class AdminBSP {
         
     }//listo
 
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama a la clase ProductDelete, sino llama a un metodo mesangeError*/
     public static void removeProduct() {
         if (DataManager.getAccess(0)) {
             ProductDelete pd = new ProductDelete();
@@ -99,6 +123,9 @@ public abstract class AdminBSP {
         }
     }
     
+    /*metodo encargado de validar el permiso del usuario y dependiendo de eso 
+    *llama al metodo ----, sino llama a un metodo mesangeError
+    *falta implementar*/
     public static void requeredProduct() {
         if (DataManager.getAccess(1)) {
             
@@ -108,11 +135,16 @@ public abstract class AdminBSP {
     }
 
     //other
+    
+    /*metodo encargado de llamar a la clase MesangeError la cual indica por 
+    *pantalla un mensaje de error*/
     private static void mesangeError() {
         MesangeError me = new MesangeError();
         me.setVisible(true);
     }
     
+    /*metodo que segun el parametro que recibe crea retorna un arreglo de String distinto para cada 
+    *muestra para la clase Register*/
     private static String[] titulo(int i) {
         switch (i) {
             case 0:
@@ -127,7 +159,11 @@ public abstract class AdminBSP {
         }
     }
 
-    // ProductRegister
+    /* ProductRegister*/
+    
+    /*metodo que recibe los datos en forma de array desde readProduct para guardarlo en una matriz
+    *que se utilizala en la clase Register con el stock de productos
+    */
     private static String[][] productStock(String[] product) {
         int tam = product.length / 7, j = 0;
         String productList[][] = new String[tam][4];
@@ -149,6 +185,9 @@ public abstract class AdminBSP {
         return productList;
     }
     
+    /*metodo que recibe los datos en forma de array desde readProduct para guardarlo en una matriz
+    *que se utilizala en la clase Register
+    */
     public static String[][] productRegister(String[] product) {
         int tam = product.length / 7, j = 0;
         String productList[][] = new String[tam][8];
@@ -169,6 +208,9 @@ public abstract class AdminBSP {
         return productList;
     }
     
+    /*metodo que recibe los datos desde DataManager para guardarlo en un arreglo
+    *que se utilizala en los metodos anteriores
+    */
     private static void readProduct(int op) {
         String product[] = DataReader.readData("C:/BuildShop/DB/products.buildshop");
         String productList[][], title[];
@@ -184,6 +226,9 @@ public abstract class AdminBSP {
     }
 
     //userRegister
+    /*metodo que recibe los datos en forma de array desde readProduct para guardarlo en una matriz
+    *que se utilizala en la clase Register
+    */
     public static String[][] userRegist(String[] users) {
         int i = 0;
         int tm = users.length / 6;
@@ -203,12 +248,18 @@ public abstract class AdminBSP {
         return userList;
     }
     
+    /*metodo que recibe los datos en forma de array desde readProduct para guardarlo en una matriz
+    *que se utilizala en la clase Register
+    */
     private static String[][] userActiv(String[] users) {
         System.out.println("created");
         String o[][] = {{""}, {""}};
         return o;
     }
     
+    /*metodo que recibe los datos desde DataManager para guardarlo en un arreglo
+    *que se utilizala en los metodos anteriores
+    */
     private static void readUsers(int op) {
         String users[] = DataReader.readData("C:/BuildShop/DB/users.buildshop");
         String usersList[][], title[];
