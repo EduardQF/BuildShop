@@ -80,4 +80,8 @@ public abstract class AgreDelete {
         DataManager.writeProducts();
         System.out.println("Product deleted");
     }
+
+    public static void ModUser(String firstname, String lastname, String rut, String clave, String email, String acces) {
+        
+    }
 }

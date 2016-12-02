@@ -253,6 +253,11 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         jMenu3.add(registerUsers);
 
         modificarWorker.setText("Modificar personal");
+        modificarWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarWorkerActionPerformed(evt);
+            }
+        });
         jMenu3.add(modificarWorker);
 
         jMenu5.setText("Agregar/Eliminar");
@@ -442,6 +447,10 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
           int priu=Integer.valueOf(String.valueOf(jTableProducts.getValueAt(x, 3)));
           addProduct(x, priu);
     }//GEN-LAST:event_addOneActionPerformed
+
+    private void modificarWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarWorkerActionPerformed
+        AdminBSP.modific();
+    }//GEN-LAST:event_modificarWorkerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

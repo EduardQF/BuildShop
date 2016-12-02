@@ -8,6 +8,7 @@ import BuildShop.Windows.MesangeError;
 import BuildShop.Windows.NewProduct;
 import BuildShop.Windows.ProductDelete;
 import BuildShop.Windows.Register;
+import buildshop.Windows.Modificar;
 
 public abstract class AdminBSP {
 
@@ -273,6 +274,31 @@ public abstract class AdminBSP {
         Register pv = new Register(title, usersList);
         pv.setVisible(true);
         
+    }
+
+    public static void modific() {
+        String reg[];
+        if (DataManager.getAccess(0)) {
+            reg=regRuts();
+            Modificar m=new Modificar(reg);
+            m.setVisible(true);
+        } else {
+            mesangeError();
+        }
+    }
+    
+    private static String[] regRuts(){
+        String users[] = DataReader.readData("C:/BuildShop/DB/users.buildshop");
+        int i = 0;
+        int tm = users.length / 6;
+        String List[] = new String[tm];
+        System.out.println("started read");
+        for (int j = 0; j < users.length; j += 7) {
+            System.out.println("read:" + i);
+            List[i] = users[j];
+            i++;
+        }
+        return List;
     }
     
 }
