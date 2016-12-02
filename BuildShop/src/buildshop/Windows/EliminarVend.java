@@ -32,7 +32,7 @@ public class EliminarVend extends javax.swing.JFrame {
         jMensaje2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Eliminar Vendedor");
+        setTitle("Eliminar Trabajador");
         setIconImage(getIconImage());
         setIconImages(getIconImages());
 

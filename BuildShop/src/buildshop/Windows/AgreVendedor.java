@@ -51,7 +51,7 @@ public class AgreVendedor extends javax.swing.JFrame {
         jAcces = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Agregar Vendedor");
+        setTitle("Agregar Trabajador");
         setIconImage(getIconImage());
         setIconImages(getIconImages());
 

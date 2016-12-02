@@ -134,6 +134,7 @@ public class NewProduct extends javax.swing.JFrame {
         jLabel8.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agregar Producto");
         setIconImage(getIconImage());
         setIconImages(getIconImages());
 
