@@ -30,10 +30,12 @@ public class LogIn extends JFrame {
 	private JButton btnExit;
 	private JLabel lblWrongUser;
 
+	/**
+	 * constructor de la ventana
+	 */
 	public LogIn() {
 		setTitle("BuildShop");
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage("C:/BuildShop/IMG/Logo32x32.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:/BuildShop/IMG/Logo32x32.png"));
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 345, 270);
@@ -107,7 +109,7 @@ public class LogIn extends JFrame {
 		lblLogo.setIcon(new ImageIcon("C:/BuildShop/IMG/Logo40x40.png"));
 		lblLogo.setBounds(43, 23, 46, 45);
 		contentPane.add(lblLogo);
-		
+
 		lblWrongUser = new JLabel("Wrong Username and/or Password");
 		lblWrongUser.setVisible(false);
 		lblWrongUser.setHorizontalAlignment(SwingConstants.CENTER);
@@ -118,19 +120,23 @@ public class LogIn extends JFrame {
 		DataManager.hideLS();
 		setLocationRelativeTo(null);
 	}
-	
+
+	/**
+	 * verifica los datos de usuario y llama a la proxima ventana en caso de
+	 * coincidir
+	 */
 	private void onLogIn() {
-        	String user = txtUsername.getText();
+		String user = txtUsername.getText();
 		String pass = pwdPassword.getText();
-    		lblWrongUser.setVisible(true);
-       		if (DataManager.findUser(user, pass)){
+		lblWrongUser.setVisible(true);
+		if (DataManager.findUser(user, pass)) {
 			DataManager.showLS();
-            		BuildShopP bsp = new BuildShopP();
-            		dispose();
-            		bsp.setVisible(true);
-        	} else {
-            		txtUsername.requestFocus();
-        	}
-    	}
+			BuildShopP bsp = new BuildShopP();
+			dispose();
+			bsp.setVisible(true);
+		} else {
+			txtUsername.requestFocus();
+		}
+	}
 
 }

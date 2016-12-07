@@ -4,25 +4,56 @@ import java.util.Calendar;
 
 @SuppressWarnings("deprecation")
 public class Ventas {
-	private String date;			/*	fecha de la venta, formato a�o-mes-dia*/
-	private String time;			/*	hora de la venta, formato 24hrs*/
-	private String id;			/*	id de venta... num boleta?*/
-	private String productID;		/*	id producto*/
-	private String productName;		/*	nombre del producto*/
-	private String productAmmo;		/*	cantidad vendida*/
-	private String productPrice;            /*	precio unitario*/
-	private String productTotal;            /*	precio total de este producto*/
-	private String total;			/*	valor total de la boleta*/
-	private String productStock;            /*	stock post-venta*/
-	private String userID;			/*	id vendedor*/
-	private String userName;		/*	nombre(+apellido?) vendedor*/
-	
-	// Constructor para nuevas ventas.
-	public Ventas(String id,String productID,String productName,String productAmmo,
-			String productPrice,String productTotal,String total,String productStock,String userID,String userName){
+	private String date; /* fecha de la venta, formato a�o-mes-dia */
+	private String time; /* hora de la venta, formato 24hrs */
+	private String id; /* id de venta... num boleta? */
+	private String productID; /* id producto */
+	private String productName; /* nombre del producto */
+	private String productAmmo; /* cantidad vendida */
+	private String productPrice; /* precio unitario */
+	private String productTotal; /* precio total de este producto */
+	private String total; /* valor total de la boleta */
+	private String productStock; /* stock post-venta */
+	private String userID; /* id vendedor */
+	private String userName; /* nombre(+apellido?) vendedor */
+
+	/**
+	 * Constructor para nuevas ventas
+	 * 
+	 * @param id
+	 *            numero de id de la venta
+	 * @param productID
+	 *            numero de id del producto
+	 * @param productName
+	 *            nombre del producto vendido
+	 * 
+	 * @param productAmmo
+	 *            cantidad vendida del producto
+	 * 
+	 * @param productPrice
+	 *            precio unitario del producto
+	 * 
+	 * @param productTotal
+	 *            precio del total del producto
+	 * 
+	 * @param total
+	 *            valor total de la boleta, incluidos otros productos de esta
+	 * 
+	 * @param productStock
+	 *            stock final del producto
+	 * 
+	 * @param userID
+	 *            id del vendedor
+	 * 
+	 * @param userName
+	 *            nombre del vendedor
+	 */
+	public Ventas(/*String id,*/ String productID, String productName, String productAmmo, String productPrice,
+			String productTotal, String total, String productStock, String userID, String userName) {
 		this.date = setDate();
 		this.time = setTime();
-		this.id = id;
+		//this.id = id;
+		this.id = String.valueOf(DataManager.getVentasSize()+1);
 		this.productID = productID;
 		this.productName = productName;
 		this.productAmmo = productAmmo;
@@ -33,10 +64,46 @@ public class Ventas {
 		this.userID = userID;
 		this.userName = userName;
 	}
-	
-	// Constructor para lectura de archivo
-	public Ventas(String date, String time,String id,String productID,String productName,String productAmmo,
-			String productPrice,String productTotal,String total,String productStock,String userID,String userName){
+
+	/**
+	 * Constructor para lectura de archivo
+	 * 
+	 * @param date
+	 *            fecha de la venta
+	 * 
+	 * @param time
+	 *            hora de la venta
+	 * @param id
+	 *            numero de id de la venta
+	 * @param productID
+	 *            numero de id del producto
+	 * @param productName
+	 *            nombre del producto vendido
+	 * 
+	 * @param productAmmo
+	 *            cantidad vendida del producto
+	 * 
+	 * @param productPrice
+	 *            precio unitario del producto
+	 * 
+	 * @param productTotal
+	 *            precio del total del producto
+	 * 
+	 * @param total
+	 *            valor total de la boleta, incluidos otros productos de esta
+	 * 
+	 * @param productStock
+	 *            stock final del producto
+	 * 
+	 * @param userID
+	 *            id del vendedor
+	 * 
+	 * @param userName
+	 *            nombre del vendedor
+	 */
+	public Ventas(String date, String time, String id, String productID, String productName, String productAmmo,
+			String productPrice, String productTotal, String total, String productStock, String userID,
+			String userName) {
 		this.date = date;
 		this.time = time;
 		this.id = id;
@@ -51,37 +118,47 @@ public class Ventas {
 		this.userName = userName;
 	}
 
-	private String setDate(){
-		String y = String.valueOf(Calendar.getInstance().getTime().getYear()+1900);
-		String m = String.valueOf((Calendar.getInstance().getTime().getMonth()+1));
+	/**
+	 * metodo que devuelve la fecha de venta de un producto
+	 * 
+	 * @return devuelve la fecha de venta
+	 */
+	private String setDate() {
+		String y = String.valueOf(Calendar.getInstance().getTime().getYear() + 1900);
+		String m = String.valueOf((Calendar.getInstance().getTime().getMonth() + 1));
 		String d = String.valueOf(Calendar.getInstance().getTime().getDate());
-		if (m.length() == 1){
-			m = "0"+m;
+		if (m.length() == 1) {
+			m = "0" + m;
 		}
-		if (d.length() == 1){
-			d = "0"+d;
+		if (d.length() == 1) {
+			d = "0" + d;
 		}
-		String date = y+"-"+m+"-"+d;
+		String date = y + "-" + m + "-" + d;
 		return date;
 	}
-	
-	private String setTime(){
+
+	/**
+	 * metodo que devuelve la hora de venta de un producto
+	 * 
+	 * @return devuelve la hora de venta
+	 */
+	private String setTime() {
 		String h = String.valueOf(Calendar.getInstance().getTime().getHours());
 		String m = String.valueOf((Calendar.getInstance().getTime().getMinutes()));
 		String s = String.valueOf(Calendar.getInstance().getTime().getSeconds());
-		if (h.length() == 1){
-			h = "0"+h;
+		if (h.length() == 1) {
+			h = "0" + h;
 		}
-		if (m.length() == 1){
-			m = "0"+m;
+		if (m.length() == 1) {
+			m = "0" + m;
 		}
-		if (s.length() == 1){
-			s = "0"+s;
+		if (s.length() == 1) {
+			s = "0" + s;
 		}
-		String time = h+"-"+m+"-"+s;
+		String time = h + "-" + m + "-" + s;
 		return time;
 	}
-	
+
 	public String getDate() {
 		return date;
 	}
@@ -161,15 +238,19 @@ public class Ventas {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getProductTotal() {
 		return productTotal;
 	}
+
 	public void setProductTotal(String productTotal) {
 		this.productTotal = productTotal;
 	}
+
 	public String getTotal() {
 		return total;
 	}
+
 	public void setTotal(String total) {
 		this.total = total;
 	}

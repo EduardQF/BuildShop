@@ -10,7 +10,32 @@ public class Product {
 	private String unit;
 	private boolean status;
 
-	// Constructor para lectura de archivo
+	/**
+	 * Constructor para lectura de archivo
+	 * 
+	 * @param id
+	 *            numero de identificacion del producto
+	 * 
+	 * @param code
+	 *            codigo de busqueda del producto
+	 * @param name
+	 *            nombre del producto
+	 * 
+	 * @param cost
+	 *            costo del producto
+	 * 
+	 * @param price
+	 *            precio de venta del producto
+	 * 
+	 * @param stock
+	 *            la cantidad en stock del producto
+	 * 
+	 * @param unit
+	 *            unidad de medida del producto
+	 * 
+	 * @param status
+	 *            estado del producto
+	 */
 	public Product(String id, String code, String name, int cost, int price, int stock, String unit, boolean status) {
 		this.id = id;
 		this.code = code;
@@ -21,8 +46,31 @@ public class Product {
 		this.unit = unit;
 		this.status = status;
 	}
-	
-	// Constructor para nuevos productos
+
+	/**
+	 * Constructor para nuevos productos
+	 * 
+	 * @param id
+	 *            numero de identificacion del producto
+	 * 
+	 * @param code
+	 *            codigo de busqueda del producto
+	 * @param name
+	 *            nombre del producto
+	 * 
+	 * @param cost
+	 *            costo del producto
+	 * 
+	 * @param price
+	 *            precio de venta del producto
+	 * 
+	 * @param stock
+	 *            la cantidad en stock del producto
+	 * 
+	 * @param unit
+	 *            unidad de medida del producto
+	 *
+	 */
 	public Product(String id, String code, String name, int cost, int price, int stock, String unit) {
 		this.id = id;
 		this.code = code;
@@ -33,7 +81,6 @@ public class Product {
 		this.unit = unit;
 		this.status = true;
 	}
-	
 
 	public void setID(String s) {
 		id = s;
@@ -82,7 +129,7 @@ public class Product {
 	public int getStock() {
 		return stock;
 	}
-	
+
 	public void setUnit(String s) {
 		unit = s;
 	}
@@ -90,7 +137,7 @@ public class Product {
 	public String getUnit() {
 		return unit;
 	}
-	
+
 	public boolean getStatus() {
 		return status;
 	}
@@ -98,6 +145,5 @@ public class Product {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
-}
 
+}

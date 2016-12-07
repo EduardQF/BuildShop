@@ -15,10 +15,12 @@ public class LoadingScreen extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblLoading;
 
+	/**
+	 * constructor de la ventana
+	 */
 	public LoadingScreen() {
 		setAlwaysOnTop(true);
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("C:/BuildShop/IMG/Logo32x32.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:/BuildShop/IMG/Logo32x32.png"));
 		setUndecorated(true);
 		setTitle("BuildShop");
 		setResizable(false);
@@ -48,6 +50,5 @@ public class LoadingScreen extends JFrame {
 
 		setLocationRelativeTo(null);
 	}
-
 
 }

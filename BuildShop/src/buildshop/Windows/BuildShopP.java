@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.*;
 
 import BuildShop.Data.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +16,8 @@ import BuildShop.Data.*;
 public class BuildShopP extends javax.swing.JFrame implements ActionListener {
 
     public BuildShopP() {
-        DataManager.hideLS();
         initComponents();
+        DataManager.hideLS();
         mostBotonsProduct();
         this.paintAll(this.getGraphics());
 
@@ -85,7 +86,7 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         jPanelBotonProductos.setLayout(jPanelBotonProductosLayout);
         jPanelBotonProductosLayout.setHorizontalGroup(
             jPanelBotonProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 494, Short.MAX_VALUE)
+            .addGap(0, 152, Short.MAX_VALUE)
         );
         jPanelBotonProductosLayout.setVerticalGroup(
             jPanelBotonProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,6 +183,11 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         jMenu1.add(fullVentas);
 
         planillaVentas.setText("Planillas de venta");
+        planillaVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                planillaVentasActionPerformed(evt);
+            }
+        });
         jMenu1.add(planillaVentas);
 
         jMenuBar1.add(jMenu1);
@@ -323,28 +329,25 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelBotonProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbusqued, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deletePventa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addOne, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteOne, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbusqued, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deletePventa, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addOne, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteOne, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addGap(207, 207, 207)
                         .addComponent(jcreatedSell, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,6 +435,8 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private void jcreatedSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcreatedSellActionPerformed
         String[] productsSell = readProducts();
         VentasBSP.generateSell(productsSell);
+        JOptionPane.showMessageDialog(this, "venta Generada con exito");
+        vaciarTable();
     }//GEN-LAST:event_jcreatedSellActionPerformed
 
     private void deletePventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePventaActionPerformed
@@ -451,6 +456,10 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
     private void modificarWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarWorkerActionPerformed
         AdminBSP.modific();
     }//GEN-LAST:event_modificarWorkerActionPerformed
+
+    private void planillaVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planillaVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_planillaVentasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -579,10 +588,13 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         for (int i = 0; i < cant - 1; i += 2) {
             System.out.println("product:" + jTableProducts.getValueAt(sig, 0) + ""
                     + "\ncant:" + jTableProducts.getValueAt(sig, 1));
+            /*producto*/
             read[i] = String.valueOf(jTableProducts.getValueAt(sig, 0));
-            read[i + 1] = String.valueOf(jTableProducts.getValueAt(sig, 1));
+            /*cantidad*/
+            read[i + 1] = String.valueOf(jTableProducts.getValueAt(sig, 2));
             sig++;
         }
+        /*total*/
         read[cant - 1] = String.valueOf(jTotal.getText());
         return read;
     }
@@ -623,6 +635,14 @@ public class BuildShopP extends javax.swing.JFrame implements ActionListener {
         jTableProducts.setValueAt(v[0], x, 2);
         jTableProducts.setValueAt(v[1], x, 4);
         mostTotal();
+    }
+
+    private void vaciarTable() {
+        DefaultTableModel model = (DefaultTableModel) jTableProducts.getModel();
+        for (int i = 0; i < jTableProducts.getRowCount(); i++) {
+            model.removeRow(i);
+            i-=1;
+        }
     }
     
 

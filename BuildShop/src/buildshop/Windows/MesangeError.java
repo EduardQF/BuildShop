@@ -3,6 +3,7 @@ package BuildShop.Windows;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 
 public class MesangeError extends javax.swing.JFrame {
@@ -10,12 +11,19 @@ public class MesangeError extends javax.swing.JFrame {
 
     public MesangeError() {
         initComponents();
+        icon();
     }
     
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage("C:/BuildShop/IMG/Logo64x64.png");
         return retValue;
+    }
+    
+    private void icon(){
+        ImageIcon icone=new ImageIcon("C:/BuildShop/IMG/log12.jpg");
+        ImageIcon icon=new ImageIcon(icone.getImage().getScaledInstance(Jicono.getWidth(),Jicono.getHeight(),Image.SCALE_DEFAULT));
+        Jicono.setIcon(icon);
     }
   
     @SuppressWarnings("unchecked")
@@ -28,6 +36,7 @@ public class MesangeError extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         icon = new javax.swing.JPanel();
+        Jicono = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -81,11 +90,11 @@ public class MesangeError extends javax.swing.JFrame {
         icon.setLayout(iconLayout);
         iconLayout.setHorizontalGroup(
             iconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addComponent(Jicono, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         iconLayout.setVerticalGroup(
             iconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addComponent(Jicono, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,6 +134,7 @@ public class MesangeError extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Jicono;
     private javax.swing.JPanel icon;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;

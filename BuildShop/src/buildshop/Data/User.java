@@ -1,13 +1,37 @@
 package BuildShop.Data;
 
-public class User extends Person{
+public class User extends Person {
 	private String id;
 	private String password;
 	private String access;
 	private boolean status;
 
-	// Constructor para lectura de archivo
-	public User(String id, String password, String access, String firstname, String lastname, String email, boolean status) {
+	/**
+	 * Constructor para lectura de archivo
+	 * 
+	 * @param id
+	 *            rut del usuario
+	 * 
+	 * @param password
+	 *            contraseña del usuario
+	 * 
+	 * @param access
+	 *            nivel de acceso del usuario
+	 * 
+	 * @param firstname
+	 *            nombre del usuario
+	 * 
+	 * @param lastname
+	 *            apellido del usuario
+	 * 
+	 * @param email
+	 *            email del usuario
+	 * 
+	 * @param status
+	 *            indica estado del usuario
+	 */
+	public User(String id, String password, String access, String firstname, String lastname, String email,
+			boolean status) {
 		this.id = id;
 		this.password = password;
 		this.access = access;
@@ -16,8 +40,28 @@ public class User extends Person{
 		this.email = email;
 		this.status = status;
 	}
-	
-	// Constructor para nuevos usuarios
+
+	/**
+	 * Constructor para nuevos usuarios
+	 * 
+	 * @param id
+	 *            rut del usuario
+	 * 
+	 * @param password
+	 *            contraseña del usuario
+	 * 
+	 * @param access
+	 *            nivel de acceso del usuario
+	 * 
+	 * @param firstname
+	 *            nombre del usuario
+	 * 
+	 * @param lastname
+	 *            apellido del usuario
+	 * 
+	 * @param email
+	 *            email del usuario
+	 */
 	public User(String id, String password, String access, String firstname, String lastname, String email) {
 		this.id = id;
 		this.password = password;
